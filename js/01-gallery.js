@@ -9,6 +9,8 @@ galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
 
 galleryContainer.addEventListener('click', onGalleryContainerClick);
 
+galleryContainer.addEventListener('keydown', onCloseImgEscapeKey);
+
 
 function createImgGallery(galleryItems) {
    return galleryItems
@@ -35,18 +37,8 @@ function onGalleryContainerClick(event) {
   }
   
   instance = basicLightbox.create(
-    `
-    <img src='${event.target.dataset.source}'>
-    `,
-    {
-      onShow: () => {
-        galleryContainer.addEventListener("keydown", onCloseImgEscapeKey);
-      },
-      onClose: () => {
-        galleryContainer.removeEventListener("keydown", onCloseImgEscapeKey);
-      },
-    }
-  );
+    `<img src='${event.target.dataset.source}'>`
+    );
   
   instance.show();
 }
@@ -56,5 +48,6 @@ function onCloseImgEscapeKey(evt) {
     instance.close();
   }
 }
+
 
 
